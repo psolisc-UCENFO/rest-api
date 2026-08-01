@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  REGISTRY: rest_api
+  REGISTRY: psolisc
   IMAGE_NAME: rest_api
 
 jobs:
