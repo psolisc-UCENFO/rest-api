@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: login to dockerhub
-        uses: docker/ligin-action@v3
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}  
@@ -29,3 +29,17 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
           build-args: |
             APP_ENV=${{ secrets.APP_ENV }}
+
+  test:
+    name: Run tests
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run test
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+      - run: npm run test
