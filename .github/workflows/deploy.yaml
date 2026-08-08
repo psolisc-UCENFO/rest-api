@@ -84,4 +84,4 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: psolisc/frontend-practica       
+          image: psolisc/frontend-practica:v1.0.0-practica       
