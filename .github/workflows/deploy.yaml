@@ -85,4 +85,4 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest   
-        continue-on-error: true   
+      continue-on-error: true   
