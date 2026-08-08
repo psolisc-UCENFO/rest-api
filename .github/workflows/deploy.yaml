@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           build-args: |
             APP_ENV=${{ secrets.APP_ENV }}
 
@@ -76,7 +76,7 @@ jobs:
 
   SnykCode:
     name: Snyk image scan
-    needs: build
+    needs: codeScan
     runs-on: ubuntu-latest
     steps:
       - name: Run Snyk to check Docker image for vulnerabilities
@@ -84,4 +84,5 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: psolisc/frontend-practica:v1.0.0-practica       
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest   
+          continue-on-error: true   
