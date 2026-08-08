@@ -62,11 +62,9 @@ jobs:
           args: >
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}   
-
-  SnykCode:
       - name: Get SonarCloud status
         run: |
-          echo "SONAR_STATUS=$(curl -s -u ${{ secrets.SONAR_TOKEN}}: https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }} | jq -r '.projectStatus.status')" >> $GITHUB_ENV
+        echo "SONAR_STATUS=$(curl -s -u ${{ secrets.SONAR_TOKEN}}: https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }} | jq -r '.projectStatus.status')" >> $GITHUB_ENV
         
       - name: Sonar Status
         run: echo ${{ env.SONAR_STATUS }}
@@ -76,16 +74,13 @@ jobs:
         #run: exit 1
         run: echo "Problemas de seguridad encontrados..."
 
-
-    name: Example workflow for Docker using Snyk 
-    on: push
-    jobs:
-      security:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Run Snyk to check Docker image for vulnerabilities
-          uses: snyk/actions/docker@master
-          env:
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          with:
-            image: your/image-to-test       
+  SnykCode:
+    name: Snyk image scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Snyk to check Docker image for vulnerabilities
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: psolisc/frontend-practica       
