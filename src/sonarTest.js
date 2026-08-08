@@ -10,7 +10,7 @@ function calculateAge(yearOfBirth) {
   return currentYear - yearOfBirth;
 }
 
-function unsafeFunction(userInput) {
+function safeFunction(userInput) {
   // Issue: eval() introduce problemas de seguridad.
   return userInput;
 }
