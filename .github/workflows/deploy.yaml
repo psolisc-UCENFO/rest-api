@@ -63,6 +63,7 @@ jobs:
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}   
 
+  SnykCode:
       - name: Get SonarCloud status
         run: |
           echo "SONAR_STATUS=$(curl -s -u ${{ secrets.SONAR_TOKEN}}: https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }} | jq -r '.projectStatus.status')" >> $GITHUB_ENV
@@ -72,4 +73,19 @@ jobs:
 
       - name: Check Status
         if: ${{ env.SONAR_STATUS == 'ERROR' }}
-        run: exit 0
+        #run: exit 1
+        run: echo "Problemas de seguridad encontrados..."
+
+
+    name: Example workflow for Docker using Snyk 
+    on: push
+    jobs:
+      security:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Run Snyk to check Docker image for vulnerabilities
+          uses: snyk/actions/docker@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            image: your/image-to-test       
