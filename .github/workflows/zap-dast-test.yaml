@@ -2,7 +2,7 @@ name: dast
 
 on:
   push:
-    branches: ["main-x"]
+    branches: ["main"]
 
 env:
   REGISTRY: psolisc
@@ -12,7 +12,7 @@ jobs:
   dast:
   permission:
     issues: write
-    
+
     name: ZAP - DAST Test
     runs-on: ubuntu-latest
 

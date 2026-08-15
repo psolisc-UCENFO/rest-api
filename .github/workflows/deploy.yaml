@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main-x" ]
 
 env:
   REGISTRY: psolisc
@@ -10,7 +10,7 @@ env:
 
 jobs:
   build:
-    name: build image
+    name: ZAP - DAST Test
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
