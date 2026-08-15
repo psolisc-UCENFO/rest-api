@@ -10,8 +10,8 @@ env:
 
 jobs:
   dast:
-  permission:
-    issues: write
+    permission:
+      issues: write
 
     name: ZAP - DAST Test
     runs-on: ubuntu-latest
