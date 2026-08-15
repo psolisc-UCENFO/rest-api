@@ -10,7 +10,7 @@ env:
 
 jobs:
   dast:
-    permission:
+    permissions:
       issues: write
 
     name: ZAP - DAST Test
