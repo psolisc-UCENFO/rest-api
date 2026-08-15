@@ -105,14 +105,14 @@ jobs:
         run: echo "Problemas de seguridad encontrados..."
 
   SnykCode:
-  name: Snyk image scan
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-  - name: Run Snyk to check Docker image for vulnerabilities
-    uses: snyk/actions/docker@master
-    env:
-      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-    with:
-      image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest   
-    continue-on-error: true   
+    name: Snyk image scan
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Snyk to check Docker image for vulnerabilities
+      uses: snyk/actions/docker@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest   
+      continue-on-error: true   
