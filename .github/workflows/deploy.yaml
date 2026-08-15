@@ -10,7 +10,7 @@ env:
 
 jobs:
   build:
-    name: ZAP - DAST Test
+    name: build image
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
